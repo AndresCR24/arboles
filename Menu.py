@@ -47,7 +47,7 @@ class Menu:
                 print("Opción no válida. Intente de nuevo.")
 
     def registrar_paquete(self):
-        prioridad = int(input("Ingrese la prioridad (0-4): "))
+        prioridad = int(input("Ingrese la prioridad (0 maxima prioridad, hasta 4 minima prioridad): "))
         peso = float(input("Ingrese el peso: "))
         tamano = int(input("Ingrese el tamaño (0: Grande, 1: Mediano, 2: Pequeño): "))
         destino = input("Ingrese el destino: ")
@@ -61,6 +61,7 @@ class Menu:
 
     def mostrar_heap_id(self):
         self.operaciones.mostrar_heap_id()
+
     def consultar_proximo_paquete(self):
         print(self.operaciones.consultar_proximo_paquete())
 
