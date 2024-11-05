@@ -13,31 +13,51 @@ class HeapBinaryTree:
         self.customlist[self.lastindexused] = data
 
         # Restore heap property (min-heap) by moving up
-        self._heapify_up(self.lastindexused)
+        self.heapify_up(self.lastindexused)
         return f"Nodo {data} insertado en el índice {self.lastindexused}"
 
-    def _heapify_up(self, index):
-        # Move the node up to maintain min-heap property
+    def heapify_up(self, index):
+        # Calcular el nodo padre que en un arbol binario es i // 2
         parent_index = index // 2
+        # Verificar que no se esta en la raiz del arbol.
+        # ademas verificar el nodo sea menor que el padre si se cumple vuelve y intercambia los valores
+        # hasta que se cumpla que es un heapMin
         while parent_index > 0 and self.customlist[index] < self.customlist[parent_index]:
-            # Swap if the current node is smaller than the parent node
+            #intercambiar los nodos
             self.customlist[index], self.customlist[parent_index] = self.customlist[parent_index], self.customlist[
                 index]
+
+            #self.customlist[index] = self.customlist[parent_index]
+            #self.customlist[parent_index] = self.customlist[index]
+            #Luego de intercambiar index toma el nuevo valor con el que se vuelve a verificar en el while
             index = parent_index
+            #Se vuelve a calcular el nodo padre para hacer la verificacion de nuevo
             parent_index = index // 2
 
+
+    # Metodo para volver a colocar el nodo mas pequeño en la raiz al eliminar un nodo
     def heapify_down(self, index):
-        # Move the node down to maintain min-heap property
+        # Calcular hijo izquierdo de un arbol binario
         left_child_index = 2 * index
+        # Calcular el hijo derecho
         right_child_index = 2 * index + 1
         smallest = index
 
+        # Si se cumple el if el hijo izquierdo tiene un valor que el nodo y actualiza el valor smallest
         if left_child_index <= self.lastindexused and self.customlist[left_child_index] < self.customlist[smallest]:
             smallest = left_child_index
+        # Si se cumple el hijo derecho tiene un valor menor y actualoza smallest
         if right_child_index <= self.lastindexused and self.customlist[right_child_index] < self.customlist[smallest]:
             smallest = right_child_index
+        # Verifica si cambia de valor
         if smallest != index:
-            self.customlist[index], self.customlist[smallest] = self.customlist[smallest], self.customlist[index]
+            # intercambia los nodos
+            self.customlist[index], self.customlist[smallest] = self.customlist[smallest], self.customlist[
+                index]
+            #self.customlist[index] = self.customlist[smallest]
+            #self.customlist[smallest] = self.customlist[index]
+
+            # llamado recursivo
             self.heapify_down(smallest)
 
     def extract(self):
@@ -54,29 +74,27 @@ class HeapBinaryTree:
         if index > self.lastindexused or self.customlist[index] is None:
             return
 
-        # Recursive call for the right child
         if index * 2 + 1 <= self.lastindexused:
             self.printTree(index * 2 + 1, prefix + ("│   " if is_left else "    "), False)
 
-        # Print the current node
         print(prefix + ("└── " if is_left else "┌── ") + str(self.customlist[index]))
 
-        # Recursive call for the left child
         if index * 2 <= self.lastindexused:
             self.printTree(index * 2, prefix + ("    " if is_left else "│   "), True)
+
 
     def printTreeIds(self, index=1, prefix="", is_left=True):
         if index > self.lastindexused or self.customlist[index] is None:
             return
 
-        # Recursive call for the right child
+
         if index * 2 + 1 <= self.lastindexused:
             self.printTreeIds(index * 2 + 1, prefix + ("│   " if is_left else "    "), False)
 
-        # Print the ID of the current node
+
         print(prefix + ("└── " if is_left else "┌── ") + str(self.customlist[index].id))
 
-        # Recursive call for the left child
+
         if index * 2 <= self.lastindexused:
             self.printTreeIds(index * 2, prefix + ("    " if is_left else "│   "), True)
 

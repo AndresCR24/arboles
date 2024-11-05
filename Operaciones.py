@@ -53,10 +53,16 @@ class Operaciones:
 
         for i in range(1, self.heap.lastindexused + 1):
             paquete = self.heap.customlist[i]
+
+            # si el id es igual al identificador se encontro el que se quiere elimianar
             if paquete.id == identificador:
+                # se remplaza el nodo encontrado con el last(Ultimo del arbol)
                 self.heap.customlist[i] = self.heap.customlist[self.heap.lastindexused]
+                # Ese ultimo que se remplazo se pone en None
                 self.heap.customlist[self.heap.lastindexused] = None
+                # Se resta 1 para que se mantenga correctamente el tamaño del arbol
                 self.heap.lastindexused -= 1
+                # se usa el metodo para re organizar el arbol hasta que cumpla con el heapMin
                 self.heap.heapify_down(i)
 
                 return f"Paquete con ID {identificador} eliminado."
