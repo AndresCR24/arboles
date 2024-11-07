@@ -88,6 +88,47 @@ class MinHeapBinaryTree:
         print("-----------------")
 
 
+    """
+    def deleteNode(self, value):
+        if self.data == None:
+            return False
+        # Comparar value con el id
+        node_value = self.data.id
+
+        if value < node_value:
+            if self.leftchild:
+                self.leftchild = self.leftchild.deleteNode(value)
+        elif value > node_value:
+            if self.rightchild:
+                self.rightchild = self.rightchild.deleteNode(value)
+        else:
+            # print("Inicia Eliminación", self.data)
+            # Caso 1: Nodo es una hoja (no tiene hijos)
+            if self.leftchild is None and self.rightchild is None:
+                # print("Ingresa x hoja")
+                return None
+            # Caso 2: Nodo tiene 2 hijos
+            elif self.leftchild is not None and self.rightchild is not None:
+                # print("Ingresa x ambos hijos")
+                last_node = self._get_last_node()
+                # print("Último nodo encontrado:", last_node.data)
+
+                # Reemplazar los datos en el nodo a eliminar con los datos del último nodo
+                self.data = last_node.data
+
+                # Restaurar la propiedad de min-heap
+                self._heapify_down()
+            # Caso 3: Nodo tiene solo un hijo a la izquierda
+            elif self.leftchild is not None:
+                # print("Ingresa x hijo a la izquierda")
+                return self.leftchild
+            # Caso 4: Nodo tiene solo un hijo a la derecha
+            else:
+                # print("Ingresa x hijo a la derecha")
+                return self.rightchild
+
+        return self
+    """
     def deleteNode(self, value):
         if self.data == None:
             return False
@@ -144,6 +185,13 @@ class MinHeapBinaryTree:
 
         return root_value
 
+    def _minsuccesor(self, rootNode):
+        #print("minsuccesor")
+        if rootNode.leftchild is not None:
+            #print("if", rootNode.leftchild.data)
+            return self._minsuccesor(rootNode.leftchild)
+        return rootNode
+
     def _get_last_node(self, node=None, parent=None):
         # Establece el nodo inicial como la raíz si no se proporciona
         if node == None:
@@ -164,10 +212,25 @@ class MinHeapBinaryTree:
                 return last_node, last_parent
 
         return None
+    """
+    def _get_last_node(self, node=None):
+        # Establece el nodo inicial como la raíz si no se proporciona
+        if node == None:
+            node = self
+        # Si no tiene hijos, es el último nodo
+        if not node.leftchild and not node.rightchild:
+            return node
 
-    def _minsuccesor(self, rootNode):
-        #print("minsuccesor")
-        if rootNode.leftchild is not None:
-            #print("if", rootNode.leftchild.data)
-            return self._minsuccesor(rootNode.leftchild)
-        return rootNode
+        # Revisar primero el hijo derecho y luego el hijo izquierdo (para encontrar el último nodo)
+        if node.rightchild:
+            last_node = node.rightchild._get_last_node(node.rightchild)
+            if last_node:
+                return last_node
+
+        if node.leftchild:
+            last_node = node.leftchild._get_last_node(node.leftchild)
+            if last_node:
+                return last_node
+
+        return None
+    """

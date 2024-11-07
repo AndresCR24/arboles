@@ -28,6 +28,16 @@ class Paquete:
             return self.tamano < other.tamano
         return self.prioridad < other.prioridad
 
+
+    def __str__(self):
+        return (f"Paquete ID: {self.id}\n"
+                f"Prioridad: {self.prioridad}\n"
+                f"Peso: {self.peso} kg\n"
+                f"Tamaño: {self.tamano}\n"
+                f"Destino: {self.destino}\n"
+                f"Fecha límite: {self.fecha_limite}\n"
+                f"Fecha de llegada: {self.llegada}")
+
     def __le__(self, other):
         return self < other or self == other
 
@@ -39,16 +49,6 @@ class Paquete:
 
     def __ne__(self, other):
         return not self == other
-
-    def __str__(self):
-        return (f"Paquete ID: {self.id}\n"
-                f"Prioridad: {self.prioridad}\n"
-                f"Peso: {self.peso} kg\n"
-                f"Tamaño: {self.tamano}\n"
-                f"Destino: {self.destino}\n"
-                f"Fecha límite: {self.fecha_limite}\n"
-                f"Fecha de llegada: {self.llegada}")
-
     """
     def __lt__(self, other):
         if self.prioridad != other.prioridad:

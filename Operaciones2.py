@@ -59,7 +59,7 @@ class Operaciones2:
 
         if deleted:
             if self.heap.data is None:
-                # Colocar en none para eliminar la referencia
+                #Colocar en none para eliminar la referencia
                 self.heap = None
             return f"Paquete con ID {identificador} eliminado."
         else:
