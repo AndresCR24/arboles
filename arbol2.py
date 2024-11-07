@@ -24,6 +24,7 @@ class MinHeapBinaryTree:
 
     def _heapify_up(self):
         # Realizar "heapify up" para mantener el menor valor en la raíz
+        #para verificar si existe el nodo y si es menor que el actual
         if self.leftchild and self.leftchild.data < self.data:
             self.data, self.leftchild.data = self.leftchild.data, self.data
             self.leftchild._heapify_up()
@@ -33,13 +34,16 @@ class MinHeapBinaryTree:
 
     def _heapify_down(self):
         # Realizar "heapify down" para mantener el menor valor en la raíz
+        #si el nodo acutal no tiene hijos
         if not self.leftchild and not self.rightchild:
             return
         smallest = self
+        #si existe el nodo y su valor es menor que el smallest
         if self.leftchild and self.leftchild.data < smallest.data:
             smallest = self.leftchild
         if self.rightchild and self.rightchild.data < smallest.data:
             smallest = self.rightchild
+        #si smallest no es el nodo actual los cambiamos
         if smallest != self:
             self.data, smallest.data = smallest.data, self.data
             smallest._heapify_down()
@@ -87,8 +91,8 @@ class MinHeapBinaryTree:
     def deleteNode(self, value):
         if self.data == None:
             return False
-        # Comparar `value` con el `id` de `Paquete`, o directamente si es `int`
-        node_value = self.data.id if isinstance(self.data, Paquete) else self.data
+        # Comparar value con el id
+        node_value = self.data.id
 
         if value < node_value:
             if self.leftchild:
@@ -134,11 +138,9 @@ class MinHeapBinaryTree:
         if self.data == None:
             return None
 
-        # Guardar el valor de la raíz para devolverlo luego
         root_value = self.data
 
-        # Llamar a deleteNode para eliminar la raíz
-        self.deleteNode(root_value.id if isinstance(root_value, Paquete) else root_value)
+        self.deleteNode(root_value.id)
 
         return root_value
 
@@ -162,6 +164,7 @@ class MinHeapBinaryTree:
                 return last_node, last_parent
 
         return None
+
     def _minsuccesor(self, rootNode):
         #print("minsuccesor")
         if rootNode.leftchild is not None:
