@@ -1,5 +1,5 @@
 from datetime import *
-from arbol import HeapBinaryTree
+from arbol import *
 from Paquete import Paquete
 import csv
 
@@ -95,6 +95,7 @@ class Operaciones:
                     print(f"Error al procesar la fila {fila}: {e}")
 
         print("Paquetes cargados desde el archivo CSV.")
+
 """
 # Ejemplo de uso
 if __name__ == "__main__":

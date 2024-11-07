@@ -15,25 +15,7 @@ class HeapBinaryTree:
         # Restore heap property (min-heap) by moving up
         self.heapify_up(self.lastindexused)
         return f"Nodo {data} insertado en el índice {self.lastindexused}"
-    """
-    def heapify_up(self, index):
-        # Calcular el nodo padre que en un arbol binario es i // 2
-        parent_index = index // 2
-        # Verificar que no se esta en la raiz del arbol.
-        # ademas verificar el nodo sea menor que el padre si se cumple vuelve y intercambia los valores
-        # hasta que se cumpla que es un heapMin
-        while parent_index > 0 and self.customlist[index] < self.customlist[parent_index]:
-            #intercambiar los nodos
-            self.customlist[index], self.customlist[parent_index] = self.customlist[parent_index], self.customlist[
-                index]
 
-            #self.customlist[index] = self.customlist[parent_index]
-            #self.customlist[parent_index] = self.customlist[index]
-            #Luego de intercambiar index toma el nuevo valor con el que se vuelve a verificar en el while
-            index = parent_index
-            #Se vuelve a calcular el nodo padre para hacer la verificacion de nuevo
-            parent_index = index // 2
-    """
     def heapify_up(self, index):
         # Calcular el nodo padre que en un arbol binario es i // 2
         parent_index = index // 2
@@ -168,7 +150,26 @@ class binarytree:
             ret += self.__str__(level + 1, index * 2 + 1)
 
         return ret
+        
+     
+    def heapify_up(self, index):
+        # Calcular el nodo padre que en un arbol binario es i // 2
+        parent_index = index // 2
+        # Verificar que no se esta en la raiz del arbol.
+        # ademas verificar el nodo sea menor que el padre si se cumple vuelve y intercambia los valores
+        # hasta que se cumpla que es un heapMin
+        while parent_index > 0 and self.customlist[index] < self.customlist[parent_index]:
+            #intercambiar los nodos
+            self.customlist[index], self.customlist[parent_index] = self.customlist[parent_index], self.customlist[
+                index]
 
+            #self.customlist[index] = self.customlist[parent_index]
+            #self.customlist[parent_index] = self.customlist[index]
+            #Luego de intercambiar index toma el nuevo valor con el que se vuelve a verificar en el while
+            index = parent_index
+            #Se vuelve a calcular el nodo padre para hacer la verificacion de nuevo
+            parent_index = index // 2
+    
     def insert(self, data):
 
         if self.lastindexused + 1 >= self.maxsize:

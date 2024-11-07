@@ -4,7 +4,7 @@ from Operaciones import Operaciones
 
 class Menu:
     def __init__(self):
-        self.operaciones = Operaciones(10)
+       self.operaciones = Operaciones(10)
 
     def mostrar_menu(self):
         print("\n--- Menú de Paquetes ---")
